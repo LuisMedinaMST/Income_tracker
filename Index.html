@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingresos/Egresos</title>
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        /* Container for Inputs */
+        input[type="number"],
+        input[type="text"] {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 300px;
+            font-size: 1rem;
+        }
+
+        input[type="button"],
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        input[type="button"]:hover,
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Messages */
+        #message1, #message2 {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* List Containers */
+        #incomes_list, #expenses_list {
+            margin-top: 20px;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gestión de ingresos y egresos</h1>
+    <p>¿Qué quieres hacer hoy?</p>
+
+    <p>Agregar un ingreso <input type="number" id="respuesta_ingreso" placeholder="Ingresa el monto" /><br>
+    con una descripción <input type="text" id="descripcion_ingreso" placeholder="p. ej., pago" />
+    <input type="button" value="Enviar ingreso" id="boton_ingreso" /></p>
+    <div id="message1" style="color: green;"></div>
+
+    <button id="mostrar_ingresos">Mostrar todos los ingresos</button>
+    <div id="incomes_list"></div><br>
+
+    <p>Agregar un gasto <input type="number" id="respuesta_gasto" placeholder="Ingresa el monto" /><br>
+    con una descripción <input type="text" id="descripcion_gasto" placeholder="p. ej., comida" />
+    <input type="button" value="Enviar gasto" id="boton_gasto" /></p>
+    <div id="message2" style="color: green;"></div>
+
+    <button id="mostrar_gastos">Mostrar todos los gastos</button>
+    <div id="expenses_list"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+// Income class
+class Income {
+    constructor(amount, description) {
+        this.amount = amount;
+        this.description = description;
+    }
+}
+
+// Expenditure class
+class Expenditure {
+    constructor(amount, description) {
+        this.amount = amount;
+        this.description = description;
+    }
+}
+
+// Arrays to store Income and Expenditure instances
+const incomes = JSON.parse(localStorage.getItem("incomes")) || []; // Load from localStorage
+const expenses = JSON.parse(localStorage.getItem("expenses")) || []; // Load from localStorage
+
+// Update localStorage after modifying incomes or expenses
+function updateLocalStorage() {
+    localStorage.setItem("incomes", JSON.stringify(incomes));
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+}
+
+// Add income on button click
+botonIngreso.addEventListener("click", () => {
+    const montoIngreso = respuestaIngreso.value; // Get input value
+    const textoDescripcion = descripcionIngreso.value; // Get description value
+
+    if (montoIngreso && textoDescripcion) {
+        const ingreso = new Income(parseFloat(montoIngreso), textoDescripcion);
+        incomes.push(ingreso); // Store the instance
+        updateLocalStorage(); // Save to localStorage
+        const messageElement1 = document.getElementById("message1");
+        messageElement1.innerHTML = `Agregaste un ingreso por la cantidad de $${ingreso.amount} y descrito como ${ingreso.description}`;
+        
+        // Clear inputs
+        respuestaIngreso.value = "";
+        descripcionIngreso.value = "";
+    } else {
+        console.log("Por favor, ingresa un monto y una descripción válidos");
+    }
+});
+
+// Add expense on button click
+botonGasto.addEventListener("click", () => {
+    const montoGasto = respuestaGasto.value; // Get input value
+    const textoDescripcion = descripcionGasto.value; // Get description value
+
+    if (montoGasto && textoDescripcion) {
+        const gasto = new Expenditure(parseFloat(montoGasto), textoDescripcion);
+        expenses.push(gasto); // Store the instance
+        updateLocalStorage(); // Save to localStorage
+        const messageElement2 = document.getElementById("message2");
+        messageElement2.innerHTML = `Agregaste un gasto por la cantidad de $${gasto.amount} y descrito como ${gasto.description}`;
+        
+        // Clear inputs
+        respuestaGasto.value = "";
+        descripcionGasto.value = "";
+    } else {
+        console.log("Por favor, ingresa un monto y una descripción válidos");
+    }
+});
+
+// Display all incomes on button click
+mostrarIngresos.addEventListener("click", () => {
+    incomesList.innerHTML = ""; // Clear the list first
+    if (incomes.length > 0) {
+        const ul = document.createElement("ul");
+        incomes.forEach((income, index) => {
+            const li = document.createElement("li");
+            li.textContent = `Ingreso ${index + 1}: ${income.amount} - ${income.description}`;
+            ul.appendChild(li);
+        });
+        incomesList.appendChild(ul);
+    } else {
+        incomesList.textContent = "No hay ingresos registrados.";
+    }
+});
+
+// Display all expenses on button click
+mostrarGastos.addEventListener("click", () => {
+    expensesList.innerHTML = ""; // Clear the list first
+    if (expenses.length > 0) {
+        const ul = document.createElement("ul");
+        expenses.forEach((expense, index) => {
+            const li = document.createElement("li");
+            li.textContent = `Gasto ${index + 1}: ${expense.amount} - ${expense.description}`;
+            ul.appendChild(li);
+        });
+        expensesList.appendChild(ul);
+    } else {
+        expensesList.textContent = "No hay gastos registrados.";
+    }
+});
